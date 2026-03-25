@@ -1412,7 +1412,7 @@
             <li>Starter done in ~3 days · Full site in ~1 week</li>
           </ul>
           <p class="upgrade-note">Not sure which you need? The $100 check tells you — and the fee comes off the build price.</p>
-          <a href="#" class="btn btn--ghost">Book a call</a>
+          <a href="https://calendly.com/johnb-petwebdesigner/pet-business-website-strategy-call" target="_blank" rel="noopener" class="btn btn--ghost">Book a call</a>
         </div>
 
         <!-- Card 2: Website Check (featured) -->
@@ -1444,7 +1444,7 @@
 
       </div>
 
-      <p class="pricing-free-line">Not ready to spend? I'll take a quick look at your homepage hero and tell you what's costing you bookings — no charge. <a href="#">Get a free Hero Check →</a></p>
+      <p class="pricing-free-line">Not ready to spend? I'll take a quick look at your homepage hero and tell you what's costing you bookings — no charge. <a href="#" class="open-free-audit-modal">Get a free Hero Check →</a></p>
 
     </div>
   </section>
@@ -1587,11 +1587,11 @@
           <div class="cta-track">
             <h4>Full Website Build</h4>
             <p>A complete website built for pet businesses — designed to turn visitors into calls and bookings.</p>
-            <a href="#" class="btn btn--outline-white">Book a free call</a>
+            <a href="https://calendly.com/johnb-petwebdesigner/pet-business-website-strategy-call" target="_blank" rel="noopener" class="btn btn--outline-white">Book a free call</a>
           </div>
         </div>
 
-        <p class="final-free-line">Not ready to spend? I'll take a quick look at your homepage hero and tell you what's costing you bookings — no charge. <a href="#">Get a free Hero Check →</a></p>
+        <p class="final-free-line">Not ready to spend? I'll take a quick look at your homepage hero and tell you what's costing you bookings — no charge. <a href="#" class="open-free-audit-modal">Get a free Hero Check →</a></p>
       </div>
     </div>
   </section>
@@ -1608,8 +1608,8 @@
         </div>
         <ul class="footer-links">
           <li><a href="#">WhatsApp</a></li>
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">Calendly</a></li>
+          <li><a href="https://www.instagram.com/johnb.petwebdesign/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://calendly.com/johnb-petwebdesigner/pet-business-website-strategy-call" target="_blank" rel="noopener">Calendly</a></li>
         </ul>
       </div>
     </div>
@@ -1627,6 +1627,91 @@
     }, { threshold: 0.12 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+
+  <!-- ── FREE AUDIT MODAL ── -->
+  <div id="free-audit-modal" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:24px;">
+    <div style="background:#fff;border-radius:14px;padding:36px 32px;max-width:440px;width:100%;position:relative;box-shadow:0 24px 64px rgba(0,0,0,0.2);">
+      <button id="close-modal" style="position:absolute;top:16px;right:18px;background:none;border:none;font-size:1.375rem;cursor:pointer;color:#9ca3af;line-height:1;">×</button>
+      <p style="font-size:0.6875rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#2D6A4F;margin:0 0 8px;">Free · No obligation</p>
+      <h3 style="font-size:1.25rem;font-weight:800;color:#111827;margin:0 0 10px;line-height:1.2;">I'll check your homepage hero for free</h3>
+      <p style="font-size:0.9rem;color:#6b7280;margin:0 0 24px;line-height:1.65;">Send me your website and I'll tell you the one thing above the fold most likely stopping people from booking.</p>
+
+      <form id="free-audit-form">
+        <div style="margin-bottom:14px;">
+          <label style="display:block;font-size:0.8125rem;font-weight:600;color:#374151;margin-bottom:6px;">Your website URL</label>
+          <input type="url" id="audit-url" placeholder="https://yourpetbusiness.com.au" required
+            style="width:100%;padding:10px 14px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:0.9375rem;outline:none;box-sizing:border-box;transition:border-color 0.15s;"
+            onfocus="this.style.borderColor='#2D6A4F'" onblur="this.style.borderColor='#e5e7eb'">
+        </div>
+        <div style="margin-bottom:20px;">
+          <label style="display:block;font-size:0.8125rem;font-weight:600;color:#374151;margin-bottom:6px;">Your email</label>
+          <input type="email" id="audit-email" placeholder="you@example.com" required
+            style="width:100%;padding:10px 14px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:0.9375rem;outline:none;box-sizing:border-box;transition:border-color 0.15s;"
+            onfocus="this.style.borderColor='#2D6A4F'" onblur="this.style.borderColor='#e5e7eb'">
+        </div>
+        <button type="submit" id="audit-submit"
+          style="width:100%;background:#E8834A;color:#fff;border:none;padding:13px 20px;border-radius:8px;font-size:0.9375rem;font-weight:700;cursor:pointer;transition:background 0.15s;">
+          Get my free Hero Check →
+        </button>
+      </form>
+
+      <div id="audit-success" style="display:none;text-align:center;padding:16px 0 8px;">
+        <div style="font-size:2rem;margin-bottom:10px;">🐾</div>
+        <p style="font-size:1rem;font-weight:700;color:#111827;margin:0 0 6px;">You'll have your results within 24 hours.</p>
+        <p style="font-size:0.875rem;color:#6b7280;margin:0;">I'll send the findings straight to your inbox.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('free-audit-modal');
+    const form = document.getElementById('free-audit-form');
+    const successMsg = document.getElementById('audit-success');
+    const submitBtn = document.getElementById('audit-submit');
+
+    document.querySelectorAll('.open-free-audit-modal').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    document.getElementById('close-modal').addEventListener('click', () => {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.textContent = 'Sending…';
+      submitBtn.disabled = true;
+
+      const websiteUrl = document.getElementById('audit-url').value.trim();
+      const email = document.getElementById('audit-email').value.trim();
+
+      try {
+        await fetch('https://pet-landing-pipeline.vercel.app/api/free-audit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ websiteUrl, email }),
+        });
+      } catch (_) {
+        // Fire and forget — show success regardless
+      }
+
+      form.style.display = 'none';
+      successMsg.style.display = 'block';
+    });
   </script>
 
 </body>
