@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mountain Hounds — A Specialist Groomer Nobody Knew About · Kindly Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --green:        #2D6A4F;
+      --green-dark:   #1B4332;
+      --green-light:  #EEF7F2;
+      --green-mid:    #D1EAD9;
+      --white:        #FFFFFF;
+      --off-white:    #F8FAFB;
+      --text:         #111827;
+      --text-muted:   #6B7280;
+      --border:       #E5E7EB;
+      --red:          #B91C1C;
+      --red-light:    #FEF2F2;
+      --amber:        #92400E;
+      --amber-light:  #FEF3C7;
+      --radius:       10px;
+      --shadow-sm:    0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+      --shadow-md:    0 4px 16px rgba(0,0,0,0.08), 0 12px 32px rgba(0,0,0,0.06);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--off-white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { width: 100%; max-width: 860px; margin: 0 auto; padding: 0 24px; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; }
+    h2 { font-size: clamp(1.25rem, 3vw, 1.75rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; }
+    h3 { font-size: 1.0625rem; font-weight: 700; }
+    p  { color: var(--text-muted); line-height: 1.75; margin-bottom: 12px; }
+    p:last-child { margin-bottom: 0; }
+    p strong { color: var(--text); font-weight: 600; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(27, 67, 50, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 0 24px;
+    }
+    .nav__inner {
+      max-width: 860px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav__back {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.875rem; font-weight: 500; color: rgba(255,255,255,0.7);
+      transition: color 0.15s;
+    }
+    .nav__back:hover { color: #fff; }
+    .nav__tag {
+      font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.4);
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .nav__pill {
+      font-size: 0.6875rem; font-weight: 700;
+      padding: 4px 12px; border-radius: 100px;
+      background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.7);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--green-dark);
+      background-image:
+        radial-gradient(ellipse 60% 70% at 90% 20%, rgba(45,106,79,0.3) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 50% at 5% 80%, rgba(45,106,79,0.15) 0%, transparent 60%);
+      padding: 72px 0 60px;
+      color: #fff;
+    }
+    .hero__eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(255,255,255,0.45);
+      margin-bottom: 20px;
+    }
+    .hero__eyebrow::before {
+      content: ''; display: inline-block;
+      width: 20px; height: 2px;
+      background: #52C281; border-radius: 2px;
+    }
+    .hero h1 { color: #fff; margin-bottom: 20px; }
+    .hero h1 em { font-style: normal; color: #52C281; }
+    .hero__sub {
+      font-size: 1rem; color: rgba(255,255,255,0.65);
+      max-width: 600px; margin-bottom: 0; line-height: 1.7;
+    }
+
+    /* Stat strip */
+    .stat-strip {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius); overflow: hidden;
+      margin-top: 36px; background: rgba(255,255,255,0.04);
+    }
+    .stat-strip__item {
+      padding: 20px 16px; text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    .stat-strip__item:last-child { border-right: none; }
+    .stat-strip__num {
+      font-size: 1.75rem; font-weight: 900; line-height: 1; color: #fff;
+      letter-spacing: -0.03em;
+    }
+    .stat-strip__num--red    { color: #FCA5A5; }
+    .stat-strip__num--green  { color: #52C281; }
+    .stat-strip__num--amber  { color: #FCD34D; }
+    .stat-strip__label {
+      font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.4);
+      margin-top: 5px;
+    }
+
+    /* Before/after screens */
+    .screens {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      margin-top: 36px;
+    }
+    .screen {
+      border-radius: var(--radius); overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .screen__tag {
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 9px 14px;
+    }
+    .screen__tag--before { background: rgba(239,68,68,0.25); color: #FCA5A5; }
+    .screen__tag--after  { background: rgba(82,194,129,0.25); color: #52C281; }
+    .screen__img { aspect-ratio: 16/10; overflow: hidden; background: #111; }
+    .screen__img img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.4s; }
+    .screen:hover .screen__img img { transform: scale(1.03); }
+    .screen__caption {
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.06);
+      font-size: 0.8125rem; color: rgba(255,255,255,0.55); line-height: 1.5;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 72px 0; }
+    section:nth-child(even):not(.hero):not(.cta-section) { background: var(--white); }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--green);
+      margin-bottom: 12px;
+    }
+    .section-label::before {
+      content: ''; display: inline-block;
+      width: 16px; height: 2px;
+      background: var(--green); border-radius: 2px;
+    }
+    .section-intro { max-width: 600px; margin-bottom: 36px; }
+
+    /* Problem callout */
+    .problem-callout {
+      background: var(--red-light); border: 1px solid #FECACA;
+      border-radius: var(--radius); padding: 24px 28px; margin-bottom: 16px;
+    }
+    .problem-callout__num {
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 8px;
+    }
+    .problem-callout h3 { color: var(--text); margin-bottom: 8px; }
+    .problem-callout p { font-size: 0.9rem; }
+    .problem-callout__fix {
+      margin-top: 14px; padding-top: 14px;
+      border-top: 1px solid #FECACA;
+      font-size: 0.875rem; font-weight: 600; color: var(--green);
+      display: flex; gap: 8px;
+    }
+    .problem-callout__fix::before { content: '→'; flex-shrink: 0; }
+
+    /* Audit table */
+    .audit-table { width: 100%; border-collapse: collapse; margin-top: 28px; font-size: 0.875rem; }
+    .audit-table thead th {
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-muted);
+      text-align: left; padding: 10px 14px;
+      background: var(--green-light); border-bottom: 2px solid var(--green-mid);
+    }
+    .audit-table tbody td {
+      padding: 13px 14px; border-bottom: 1px solid var(--border);
+      vertical-align: top; line-height: 1.6;
+    }
+    .audit-table tbody tr:last-child td { border-bottom: none; }
+    .audit-table tbody tr:hover td { background: var(--green-light); }
+    .audit-table tfoot td {
+      padding: 14px; border-top: 2px solid var(--border);
+      background: var(--off-white); font-weight: 700; color: var(--text);
+    }
+    .score-before { font-weight: 700; color: var(--red); white-space: nowrap; }
+    .score-after  { font-weight: 700; color: var(--green); white-space: nowrap; }
+    .area-name    { font-weight: 600; color: var(--text); white-space: nowrap; }
+    .area-note    { color: var(--text-muted); font-size: 0.8125rem; }
+
+    /* Changes grid */
+    .changes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+    .change-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .change-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .change-card__icon { font-size: 1.625rem; margin-bottom: 12px; }
+    .change-card h3 { font-size: 0.9375rem; margin-bottom: 8px; }
+    .change-card p { font-size: 0.875rem; }
+
+    /* Result strip */
+    .result-strip {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      background: var(--border); border-radius: var(--radius);
+      overflow: hidden; margin-top: 36px; margin-bottom: 32px;
+    }
+    .result-item {
+      background: var(--white); padding: 28px 20px; text-align: center;
+    }
+    .result-item__num {
+      font-size: 2.25rem; font-weight: 900; color: var(--green);
+      letter-spacing: -0.03em; line-height: 1;
+    }
+    .result-item__label {
+      font-size: 0.75rem; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.08em; margin-top: 6px;
+    }
+
+    /* Build preview */
+    .build-preview {
+      border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; box-shadow: var(--shadow-md);
+    }
+    .build-preview__bar {
+      background: var(--green); padding: 12px 18px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .build-preview__bar-label {
+      font-size: 0.75rem; font-weight: 700; color: rgba(255,255,255,0.9);
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    .build-preview__bar-link {
+      font-size: 0.8125rem; font-weight: 600; color: rgba(255,255,255,0.85);
+      transition: color 0.15s;
+    }
+    .build-preview__bar-link:hover { color: #fff; }
+    .build-preview img { width: 100%; display: block; }
+
+    /* CTA section */
+    .cta-section {
+      background: var(--green-dark);
+      padding: 72px 0;
+      text-align: center;
+    }
+    .cta-section h2 { color: #fff; margin-bottom: 16px; }
+    .cta-section p  { color: rgba(255,255,255,0.65); max-width: 520px; margin: 0 auto 32px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.9375rem; font-weight: 700; padding: 14px 28px;
+      border-radius: var(--radius); text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn--primary { background: #52C281; color: #fff; }
+    .btn--primary:hover { background: #3dab6a; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(82,194,129,0.35); }
+    .btn--ghost { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.2); }
+    .btn--ghost:hover { background: rgba(255,255,255,0.18); transform: translateY(-1px); }
+    .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    /* Page footer */
+    .page-footer {
+      background: var(--green-dark); border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 24px 0;
+    }
+    .page-footer__inner {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .page-footer a {
+      font-size: 0.8125rem; color: rgba(255,255,255,0.45);
+      transition: color 0.15s;
+    }
+    .page-footer a:hover { color: rgba(255,255,255,0.85); }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 360ms ease-out, transform 360ms ease-out; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal--d1 { transition-delay: 80ms; }
+    .reveal--d2 { transition-delay: 160ms; }
+    .reveal--d3 { transition-delay: 240ms; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+    @media (max-width: 700px) {
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-strip__item:nth-child(2) { border-right: none; }
+      .stat-strip__item:nth-child(1),
+      .stat-strip__item:nth-child(2) { border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .screens { grid-template-columns: 1fr; }
+      .changes { grid-template-columns: 1fr; }
+      .result-strip { grid-template-columns: 1fr; }
+      .audit-table .score-after { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav__inner">
+    <a href="index.html" class="nav__back">← Kindly Studio</a>
+    <span class="nav__tag">Case Study</span>
+    <span class="nav__pill">Mountain Hounds · Grooming · AU</span>
+  </div>
+</nav>
+
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero__eyebrow">Mountain Hounds · Dog Grooming · Katoomba, Blue Mountains NSW</div>
+    <h1>1-on-1 grooming. A spa treatment no other groomer offers. <em>The website mentioned neither.</em></h1>
+    <p class="hero__sub">
+      Mountain Hounds does something most groomers can't — every dog gets a solo session, no other dogs in the room, with an optional Nagayu CO₂ spa treatment. Their website headline said "Premium Pet Styling." That's it. No suburb. No service. No reason to stay.
+    </p>
+
+    <div class="stat-strip reveal">
+      <div class="stat-strip__item">
+        <div class="stat-strip__num stat-strip__num--red">34%</div>
+        <div class="stat-strip__label">Website score before</div>
+      </div>
+      <div class="stat-strip__item">
+        <div class="stat-strip__num stat-strip__num--green">75%</div>
+        <div class="stat-strip__label">Website score after</div>
+      </div>
+      <div class="stat-strip__item">
+        <div class="stat-strip__num stat-strip__num--amber">4</div>
+        <div class="stat-strip__label">Big problems found</div>
+      </div>
+      <div class="stat-strip__item">
+        <div class="stat-strip__num">167</div>
+        <div class="stat-strip__label">Things we checked</div>
+      </div>
+    </div>
+
+    <div class="screens">
+      <div class="screen reveal reveal--d1">
+        <div class="screen__tag screen__tag--before">Before — their live website</div>
+        <div class="screen__img">
+          <img src="../job-portfolio/img/mountain-hounds-live.png" alt="Mountain Hounds live website — generic headline, no rating, no pricing" loading="lazy" />
+        </div>
+        <div class="screen__caption">
+          "Premium Pet Styling" — no suburb, no service type, no pricing. Nothing to tell a dog owner in Katoomba they've found their groomer.
+        </div>
+      </div>
+      <div class="screen reveal reveal--d2">
+        <div class="screen__tag screen__tag--after">After — the rebuilt page</div>
+        <div class="screen__img">
+          <img src="img/MountainHoundz.png" alt="Mountain Hounds rebuilt — 1-on-1 positioning, Nagayu spa, Google rating, pricing" loading="lazy" />
+        </div>
+        <div class="screen__caption">
+          Suburb in the headline. 1-on-1 and Nagayu spa chips above the fold. Google rating visible. Real prices on the homepage.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── THE PROBLEM ── -->
+<section>
+  <div class="container">
+    <div class="section-label">What was going wrong</div>
+    <h2>The website was silent about the things that make them different</h2>
+    <p class="section-intro">We went through the live mountainhoundsdoggrooming.com and checked 167 things. Three areas scored below 15%. The business had genuine advantages over every other groomer in the area — and not one of them appeared on the page.</p>
+
+    <div class="problem-callout reveal">
+      <div class="problem-callout__num">Problem 01 · The headline told nobody anything</div>
+      <h3>"Premium Pet Styling" — no suburb, no service, no reason to stay</h3>
+      <p>
+        Someone searching "dog groomer Katoomba" has a few seconds to decide if they've found what they're looking for.
+        "Premium Pet Styling" doesn't say grooming, doesn't say Blue Mountains, and doesn't say anything about what makes this place worth calling.
+        The headline scored <strong>4 out of 28</strong> — just 14%.
+      </p>
+      <div class="problem-callout__fix">
+        New headline: "Dog Grooming in Katoomba, Blue Mountains." Suburb and service, immediately. Google rating above the headline so trust comes first.
+      </div>
+    </div>
+
+    <div class="problem-callout reveal">
+      <div class="problem-callout__num">Problem 02 · Their two biggest advantages — both invisible</div>
+      <h3>1-on-1 grooming and a Nagayu spa. Neither was on the page.</h3>
+      <p>
+        The number one question every dog owner has before booking a new groomer: "Will my dog be with other dogs?"
+        Mountain Hounds has the perfect answer — one dog at a time, always. No kennels, no other animals in the room.
+        They also offer a Nagayu CO₂ spa treatment — a genuine health benefit almost no other groomer provides.
+        Neither was mentioned anywhere on the homepage. Emotional framing scored <strong>4 out of 16</strong> — just 25%.
+      </p>
+      <div class="problem-callout__fix">
+        "1-on-1 Only — No Other Dogs" and "Nagayu CO₂ Spa" added as hero trust chips — visible before the headline, restated in features and FAQ.
+      </div>
+    </div>
+
+    <div class="problem-callout reveal">
+      <div class="problem-callout__num">Problem 03 · Prices existed — just not where anyone would look</div>
+      <h3>Pricing was on /services. Not on the homepage where visitors land.</h3>
+      <p>
+        Dog owners want to know if you're in their budget before they pick up the phone.
+        If they can't find a price quickly, most of them don't call — they move to the next groomer.
+        Mountain Hounds had a services page with real prices, but no visitor landing on the homepage ever saw it.
+        Pricing scored <strong>5 out of 16</strong> — just 31%.
+      </p>
+      <div class="problem-callout__fix">
+        Three pricing cards added directly to the homepage: Bath and Brush from $65, Full Groom from $85, Nagayu Spa add-on from $30.
+      </div>
+    </div>
+
+    <div class="problem-callout reveal">
+      <div class="problem-callout__num">Problem 04 · No FAQ — the most important question never answered</div>
+      <h3>"Is it just my dog?" — first-time clients need to know this before they book</h3>
+      <p>
+        First-time grooming clients are nervous. They want to know their dog won't be in a cage, won't be left waiting with other dogs, and is in safe hands.
+        A FAQ answering these questions directly is often the last thing someone reads before they decide to book.
+        Mountain Hounds had no FAQ on their site at all. FAQ scored <strong>1 out of 15</strong> — just 7%.
+      </p>
+      <div class="problem-callout__fix">
+        FAQ built from scratch with 8 questions. "Is it just my dog?" answered first. 1-on-1 model and cage-free policy stated plainly.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── FULL AUDIT BREAKDOWN ── -->
+<section>
+  <div class="container">
+    <div class="section-label">The full check</div>
+    <h2>Every area we looked at — and what we found</h2>
+    <p class="section-intro">We check 167 specific things across 9 areas of a website — the things that determine whether someone calls or quietly moves on. Here's how Mountain Hounds scored on each one, and where they ended up after the rebuild.</p>
+
+    <table class="audit-table reveal">
+      <thead>
+        <tr>
+          <th>Area we checked</th>
+          <th>Score before</th>
+          <th>Score after</th>
+          <th>What the problem was</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="area-name">The first thing people see</td>
+          <td><span class="score-before">4/28 · 14%</span></td>
+          <td><span class="score-after">27/28 · 96%</span></td>
+          <td class="area-note">"Premium Pet Styling" — no suburb, no service, nothing to hold a visitor. Rebuilt with a clear headline, suburb, Google rating above it, and 1-on-1 and Nagayu chips immediately visible.</td>
+        </tr>
+        <tr>
+          <td class="area-name">Why someone should trust you</td>
+          <td><span class="score-before">3/22 · 14%</span></td>
+          <td><span class="score-after">8/22 · 36%</span></td>
+          <td class="area-note">Three text-only reviews, no groomer photo, no Google rating. Added the rating above the headline and testimonial cards before pricing. Still room to grow once a real groomer photo is added.</td>
+        </tr>
+        <tr>
+          <td class="area-name">Prices and what you offer</td>
+          <td><span class="score-before">5/16 · 31%</span></td>
+          <td><span class="score-after">16/16 · 100%</span></td>
+          <td class="area-note">Prices existed on a separate page — invisible to homepage visitors. Added three clear pricing cards. This went from 31% to a perfect score.</td>
+        </tr>
+        <tr>
+          <td class="area-name">Answering their fears</td>
+          <td><span class="score-before">4/16 · 25%</span></td>
+          <td><span class="score-after">9/16 · 56%</span></td>
+          <td class="area-note">1-on-1 grooming and the Nagayu spa — both invisible. Put both in the hero as trust chips, restated in features and FAQ. The #1 grooming anxiety — "will my dog be with other dogs?" — now answered immediately.</td>
+        </tr>
+        <tr>
+          <td class="area-name">How easy it is to get in touch</td>
+          <td><span class="score-before">4/14 · 29%</span></td>
+          <td><span class="score-after">11/14 · 79%</span></td>
+          <td class="area-note">Booking page existed but required navigation. No visible phone number, no WhatsApp. Added a prominent booking CTA above the fold, sticky scroll button, and WhatsApp floating button.</td>
+        </tr>
+        <tr>
+          <td class="area-name">Common questions dog owners ask</td>
+          <td><span class="score-before">1/15 · 7%</span></td>
+          <td><span class="score-after">8/15 · 53%</span></td>
+          <td class="area-note">No FAQ at all. Built an 8-question FAQ from scratch. First answer: "Is it just my dog? Yes — always." Cage-free policy and 1-on-1 model stated plainly in the answers.</td>
+        </tr>
+        <tr>
+          <td class="area-name">How it works on a phone</td>
+          <td><span class="score-before">13/20 · 65%</span></td>
+          <td><span class="score-after">17/20 · 85%</span></td>
+          <td class="area-note">The site was responsive, which is a good baseline. But no sticky CTA and no tap-to-call. Added sticky booking button, WhatsApp float, and confirmed phone number with tap-to-call.</td>
+        </tr>
+        <tr>
+          <td class="area-name">Whether Google can find you</td>
+          <td><span class="score-before">10/19 · 53%</span></td>
+          <td><span class="score-after">16/19 · 84%</span></td>
+          <td class="area-note">Solid baseline but no LocalBusiness schema, weak title tag, generic meta description. Added schema, rewrote the title to include suburb and service, updated the description with a clear call to action.</td>
+        </tr>
+        <tr>
+          <td class="area-name">Accessibility (can everyone use it?)</td>
+          <td><span class="score-before">12/19 · 63%</span></td>
+          <td><span class="score-after">13/19 · 68%</span></td>
+          <td class="area-note">Reasonable baseline from the GoDaddy platform. Added descriptive alt text on all images and ARIA labels on interactive elements.</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td><strong>Total</strong></td>
+          <td><span class="score-before">56 / 167 · 34%</span></td>
+          <td><span class="score-after">125 / 167 · 75%</span></td>
+          <td class="area-note" style="font-weight:600; color:var(--text);">+69 points. Three areas had been below 15% — all rebuilt from scratch. A real groomer photo would push trust to 85%+.</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</section>
+
+
+<!-- ── WHAT WE CHANGED ── -->
+<section>
+  <div class="container">
+    <div class="section-label">The rebuild</div>
+    <h2>Four things we changed that made the biggest difference</h2>
+    <p class="section-intro">Mountain Hounds already had a great product. The rebuild was about making sure the website actually said so — in the first few seconds, in the right order, in plain language that a dog owner searching on their phone can act on immediately.</p>
+
+    <div class="changes">
+      <div class="change-card reveal">
+        <div class="change-card__icon">📍</div>
+        <h3>Suburb and service — immediately</h3>
+        <p>The new headline says exactly what you need to know: "Dog Grooming in Katoomba, Blue Mountains." Your suburb, your service, in the first line. Google rating right above it — trust before anything else.</p>
+      </div>
+      <div class="change-card reveal reveal--d1">
+        <div class="change-card__icon">🐕</div>
+        <h3>1-on-1 — the first thing you read</h3>
+        <p>"1-on-1 Only — No Other Dogs" is now a hero trust chip visible before the headline. Then in the features section. Then in the FAQ. Every nervous first-timer gets the answer to their biggest question before they have to ask.</p>
+      </div>
+      <div class="change-card reveal reveal--d2">
+        <div class="change-card__icon">💰</div>
+        <h3>Real prices — no more hunting</h3>
+        <p>Bath and Brush from $65. Full Groom from $85. Nagayu Spa add-on from $30. Dog owners can now decide if Mountain Hounds is in their budget in under ten seconds — without leaving the page to find out.</p>
+      </div>
+      <div class="change-card reveal reveal--d3">
+        <div class="change-card__icon">💬</div>
+        <h3>FAQ that answers the real questions</h3>
+        <p>Eight questions, starting with "Is it just my dog?" — the one every first-timer wants answered most. The FAQ handles the nervousness before it becomes a reason to leave. It's the last thing someone reads before they book.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── THE BUILD ── -->
+<section>
+  <div class="container">
+    <div class="section-label">What we built</div>
+    <h2>The rebuilt page — scored 75% on the same 167-point check</h2>
+    <p class="section-intro">After the audit we rebuilt the homepage around every problem we found. Then we ran the same 167-point check again on the new page — not to look better, but to verify it actually works.</p>
+
+    <div class="result-strip reveal">
+      <div class="result-item">
+        <div class="result-item__num">75%</div>
+        <div class="result-item__label">New website score</div>
+      </div>
+      <div class="result-item">
+        <div class="result-item__num">+69</div>
+        <div class="result-item__label">Points gained</div>
+      </div>
+      <div class="result-item">
+        <div class="result-item__num">4 / 4</div>
+        <div class="result-item__label">Big problems fixed</div>
+      </div>
+    </div>
+
+    <div class="build-preview reveal">
+      <div class="build-preview__bar">
+        <span class="build-preview__bar-label">✓ The rebuilt Mountain Hounds page</span>
+        <a href="https://mountain-hounds.vercel.app" target="_blank" rel="noopener" class="build-preview__bar-link">View the live build ↗</a>
+      </div>
+      <img src="img/MountainHoundz.png" alt="Full Mountain Hounds rebuilt page — 1-on-1 positioning, Nagayu spa, Google rating, pricing" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Your site might have the same problems</h2>
+    <p>Most pet business websites have 2–3 of these issues — and the owner has no idea, because visitors just quietly leave. A $100 check tells you exactly what's stopping people from calling, in plain English, in 24 hours.</p>
+    <div class="btn-row">
+      <a href="index.html#services" class="btn btn--primary">Check my website — $100 →</a>
+      <a href="index.html" class="btn btn--ghost">← See more work</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── FOOTER ── -->
+<footer class="page-footer">
+  <div class="container">
+    <div class="page-footer__inner">
+      <a href="index.html">🐾 Kindly Studio</a>
+      <span style="font-size:0.8125rem; color:rgba(255,255,255,0.3);">AU · NZ · SG</span>
+      <a href="index.html">← Back to all work</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

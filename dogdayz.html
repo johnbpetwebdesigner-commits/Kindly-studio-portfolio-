@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dogdayz — How We Fixed a 4.9★ Business That Nobody Was Booking · Kindly Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --green:        #2D6A4F;
+      --green-dark:   #1B4332;
+      --green-light:  #EEF7F2;
+      --green-mid:    #D1EAD9;
+      --white:        #FFFFFF;
+      --off-white:    #F8FAFB;
+      --text:         #111827;
+      --text-muted:   #6B7280;
+      --border:       #E5E7EB;
+      --red:          #B91C1C;
+      --red-light:    #FEF2F2;
+      --amber:        #92400E;
+      --amber-light:  #FEF3C7;
+      --radius:       10px;
+      --shadow-sm:    0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+      --shadow-md:    0 4px 16px rgba(0,0,0,0.08), 0 12px 32px rgba(0,0,0,0.06);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--off-white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { width: 100%; max-width: 860px; margin: 0 auto; padding: 0 24px; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; }
+    h2 { font-size: clamp(1.25rem, 3vw, 1.75rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; }
+    h3 { font-size: 1.0625rem; font-weight: 700; }
+    p  { color: var(--text-muted); line-height: 1.75; margin-bottom: 12px; }
+    p:last-child { margin-bottom: 0; }
+    p strong { color: var(--text); font-weight: 600; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(27, 67, 50, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 0 24px;
+    }
+    .nav__inner {
+      max-width: 860px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav__back {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.875rem; font-weight: 500; color: rgba(255,255,255,0.7);
+      transition: color 0.15s;
+    }
+    .nav__back:hover { color: #fff; }
+    .nav__tag {
+      font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.4);
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .nav__pill {
+      font-size: 0.6875rem; font-weight: 700;
+      padding: 4px 12px; border-radius: 100px;
+      background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.7);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--green-dark);
+      background-image:
+        radial-gradient(ellipse 60% 70% at 90% 20%, rgba(45,106,79,0.3) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 50% at 5% 80%, rgba(45,106,79,0.15) 0%, transparent 60%);
+      padding: 72px 0 60px;
+      color: #fff;
+    }
+    .hero__eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(255,255,255,0.45);
+      margin-bottom: 20px;
+    }
+    .hero__eyebrow::before {
+      content: ''; display: inline-block;
+      width: 20px; height: 2px;
+      background: #52C281; border-radius: 2px;
+    }
+    .hero h1 { color: #fff; margin-bottom: 20px; }
+    .hero h1 em { font-style: normal; color: #52C281; }
+    .hero__sub {
+      font-size: 1rem; color: rgba(255,255,255,0.65);
+      max-width: 600px; margin-bottom: 0; line-height: 1.7;
+    }
+
+    /* Stat strip */
+    .stat-strip {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius); overflow: hidden;
+      margin-top: 36px; background: rgba(255,255,255,0.04);
+    }
+    .stat-strip__item {
+      padding: 20px 16px; text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    .stat-strip__item:last-child { border-right: none; }
+    .stat-strip__num {
+      font-size: 1.75rem; font-weight: 900; line-height: 1; color: #fff;
+      letter-spacing: -0.03em;
+    }
+    .stat-strip__num--red    { color: #FCA5A5; }
+    .stat-strip__num--green  { color: #52C281; }
+    .stat-strip__num--amber  { color: #FCD34D; }
+    .stat-strip__label {
+      font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.4);
+      margin-top: 5px;
+    }
+
+    /* Before/after screens */
+    .screens {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      margin-top: 36px;
+    }
+    .screen {
+      border-radius: var(--radius); overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .screen__tag {
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 9px 14px;
+    }
+    .screen__tag--before { background: rgba(239,68,68,0.25); color: #FCA5A5; }
+    .screen__tag--after  { background: rgba(82,194,129,0.25); color: #52C281; }
+    .screen__img { aspect-ratio: 16/10; overflow: hidden; background: #111; }
+    .screen__img img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.4s; }
+    .screen:hover .screen__img img { transform: scale(1.03); }
+    .screen__caption {
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.06);
+      font-size: 0.8125rem; color: rgba(255,255,255,0.55); line-height: 1.5;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 72px 0; }
+    section:nth-child(even):not(.hero):not(.cta-section) { background: var(--white); }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--green);
+      margin-bottom: 12px;
+    }
+    .section-label::before {
+      content: ''; display: inline-block;
+      width: 16px; height: 2px;
+      background: var(--green); border-radius: 2px;
+    }
+    .section-intro { max-width: 600px; margin-bottom: 36px; }
+
+    /* Problem callout */
+    .problem-callout {
+      background: var(--red-light); border: 1px solid #FECACA;
+      border-radius: var(--radius); padding: 24px 28px; margin-bottom: 16px;
+    }
+    .problem-callout__num {
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 8px;
+    }
+    .problem-callout h3 { color: var(--text); margin-bottom: 8px; }
+    .problem-callout p { font-size: 0.9rem; }
+    .problem-callout__fix {
+      margin-top: 14px; padding-top: 14px;
+      border-top: 1px solid #FECACA;
+      font-size: 0.875rem; font-weight: 600; color: var(--green);
+      display: flex; gap: 8px;
+    }
+    .problem-callout__fix::before { content: '→'; flex-shrink: 0; }
+
+    /* Audit table */
+    .audit-table { width: 100%; border-collapse: collapse; margin-top: 28px; font-size: 0.875rem; }
+    .audit-table thead th {
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-muted);
+      text-align: left; padding: 10px 14px;
+      background: var(--green-light); border-bottom: 2px solid var(--green-mid);
+    }
+    .audit-table tbody td {
+      padding: 13px 14px; border-bottom: 1px solid var(--border);
+      vertical-align: top; line-height: 1.6;
+    }
+    .audit-table tbody tr:last-child td { border-bottom: none; }
+    .audit-table tbody tr:hover td { background: var(--green-light); }
+    .audit-table tfoot td {
+      padding: 14px; border-top: 2px solid var(--border);
+      background: var(--off-white); font-weight: 700; color: var(--text);
+    }
+    .score-before { font-weight: 700; color: var(--red); white-space: nowrap; }
+    .score-after  { font-weight: 700; color: var(--green); white-space: nowrap; }
+    .score-na     { font-weight: 500; color: var(--text-muted); }
+    .area-name    { font-weight: 600; color: var(--text); white-space: nowrap; }
+    .area-note    { color: var(--text-muted); font-size: 0.8125rem; }
+
+    /* Grade badge */
+    .grade {
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 0.6875rem; font-weight: 800; width: 26px; height: 26px;
+      border-radius: 50%;
+    }
+    .grade--f { background: #FEE2E2; color: #B91C1C; }
+    .grade--d { background: var(--amber-light); color: var(--amber); }
+    .grade--b { background: #DCFCE7; color: #15803D; }
+
+    /* Changes grid */
+    .changes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+    .change-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .change-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .change-card__icon { font-size: 1.625rem; margin-bottom: 12px; }
+    .change-card h3 { font-size: 0.9375rem; margin-bottom: 8px; }
+    .change-card p { font-size: 0.875rem; }
+
+    /* Result strip */
+    .result-strip {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      background: var(--border); border-radius: var(--radius);
+      overflow: hidden; margin-top: 36px; margin-bottom: 32px;
+    }
+    .result-item {
+      background: var(--white); padding: 28px 20px; text-align: center;
+    }
+    .result-item__num {
+      font-size: 2.25rem; font-weight: 900; color: var(--green);
+      letter-spacing: -0.03em; line-height: 1;
+    }
+    .result-item__label {
+      font-size: 0.75rem; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.08em; margin-top: 6px;
+    }
+
+    /* Build preview */
+    .build-preview {
+      border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; box-shadow: var(--shadow-md);
+    }
+    .build-preview__bar {
+      background: var(--green); padding: 12px 18px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .build-preview__bar-label {
+      font-size: 0.75rem; font-weight: 700; color: rgba(255,255,255,0.9);
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    .build-preview__bar-link {
+      font-size: 0.8125rem; font-weight: 600; color: rgba(255,255,255,0.85);
+      transition: color 0.15s;
+    }
+    .build-preview__bar-link:hover { color: #fff; }
+    .build-preview img { width: 100%; display: block; }
+
+    /* CTA footer */
+    .cta-section {
+      background: var(--green-dark);
+      padding: 72px 0;
+      text-align: center;
+    }
+    .cta-section h2 { color: #fff; margin-bottom: 16px; }
+    .cta-section p  { color: rgba(255,255,255,0.65); max-width: 520px; margin: 0 auto 32px; }
+    .cta-section .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.9375rem; font-weight: 700; padding: 14px 28px;
+      border-radius: var(--radius); text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn--primary { background: #52C281; color: #fff; }
+    .btn--primary:hover { background: #3dab6a; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(82,194,129,0.35); }
+    .btn--ghost { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.2); }
+    .btn--ghost:hover { background: rgba(255,255,255,0.18); transform: translateY(-1px); }
+    .cta-section .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    /* Page footer */
+    .page-footer {
+      background: var(--green-dark); border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 24px 0;
+    }
+    .page-footer__inner {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .page-footer a {
+      font-size: 0.8125rem; color: rgba(255,255,255,0.45);
+      transition: color 0.15s;
+    }
+    .page-footer a:hover { color: rgba(255,255,255,0.85); }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 360ms ease-out, transform 360ms ease-out; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal--d1 { transition-delay: 80ms; }
+    .reveal--d2 { transition-delay: 160ms; }
+    .reveal--d3 { transition-delay: 240ms; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+    @media (max-width: 700px) {
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-strip__item:nth-child(2) { border-right: none; }
+      .stat-strip__item:nth-child(1),
+      .stat-strip__item:nth-child(2) { border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .screens { grid-template-columns: 1fr; }
+      .changes { grid-template-columns: 1fr; }
+      .result-strip { grid-template-columns: 1fr; }
+      .audit-table .score-after { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav__inner">
+    <a href="index.html" class="nav__back">← Kindly Studio</a>
+    <span class="nav__tag">Case Study</span>
+    <span class="nav__pill">Dogdayz · Dog Boarding · AU</span>
+  </div>
+</nav>
+
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero__eyebrow">Dogdayz · Dog Boarding · Victoria, Australia</div>
+    <h1>Great reviews. Cage-free farm stays. Five locations. <em>The website hid all of it.</em></h1>
+    <p class="hero__sub">
+      Dogdayz had a 4.9-star rating with 300+ Google reviews and cage-free boarding at five Melbourne locations.
+      Their website showed none of it. We ran a full check and rebuilt the page around what dog owners actually need to see before they'll pick up the phone.
+    </p>
+
+    <div class="stat-strip reveal">
+      <div class="stat-strip__item">
+        <div class="stat-strip__num stat-strip__num--red">37%</div>
+        <div class="stat-strip__label">Website score before</div>
+      </div>
+      <div class="stat-strip__item">
+        <div class="stat-strip__num stat-strip__num--green">78%</div>
+        <div class="stat-strip__label">Website score after</div>
+      </div>
+      <div class="stat-strip__item">
+        <div class="stat-strip__num stat-strip__num--amber">4</div>
+        <div class="stat-strip__label">Big problems found</div>
+      </div>
+      <div class="stat-strip__item">
+        <div class="stat-strip__num">167</div>
+        <div class="stat-strip__label">Things we checked</div>
+      </div>
+    </div>
+
+    <div class="screens">
+      <div class="screen reveal reveal--d1">
+        <div class="screen__tag screen__tag--before">Before — their live website</div>
+        <div class="screen__img">
+          <img src="../job-portfolio/img/dogdayz-live.png" alt="Dogdayz live website — generic headline, no reviews, no pricing" />
+        </div>
+        <div class="screen__caption">
+          "Holidays for dogs!" — no suburb, no price, no Google reviews. Nothing to give a first-time visitor a reason to stay.
+        </div>
+      </div>
+      <div class="screen reveal reveal--d2">
+        <div class="screen__tag screen__tag--after">After — the rebuilt page</div>
+        <div class="screen__img">
+          <img src="../job-portfolio/img/dogdayz.png" alt="Dogdayz rebuilt — star rating at top, cage-free positioning, pricing visible" />
+        </div>
+        <div class="screen__caption">
+          Star rating above the headline. Cage-free front and centre. Real prices. Three reviews before you even scroll to pricing.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── THE PROBLEM ── -->
+<section>
+  <div class="container">
+    <div class="section-label">What was going wrong</div>
+    <h2>The website was hiding everything that would make someone book</h2>
+    <p class="section-intro">We went through the live dogdayz.com.au and checked 167 things — every piece of information a dog owner needs before they'll trust a boarding business enough to call. Four problems stood out as the ones costing the most bookings.</p>
+
+    <div class="problem-callout reveal">
+      <div class="problem-callout__num">Problem 01 · The headline said nothing</div>
+      <h3>"Holidays for dogs!" — but where? What kind? Who for?</h3>
+      <p>
+        When someone searches "dog boarding Melbourne" and lands on your website, they have about five seconds to decide if they're in the right place.
+        "Holidays for dogs!" answers none of the questions: What do you offer? Where are you? Can I trust you?
+        The headline scored <strong>9 out of 28</strong> — just 32%.
+      </p>
+      <div class="problem-callout__fix">
+        We wrote a new headline: "Dog Boarding. Your dog plays all day." Suburb and cage-free in the first line. Google rating above the headline so trust is the very first thing you see.
+      </div>
+    </div>
+
+    <div class="problem-callout reveal">
+      <div class="problem-callout__num">Problem 02 · 300+ Google reviews — hidden from every visitor</div>
+      <h3>The strongest trust signal a boarding business can have — not on the page</h3>
+      <p>
+        Dogdayz had a 4.9★ rating with over 300 reviews. Not one review, not the star rating, appeared on their homepage.
+        Every visitor started from zero trust. And when they went to Google to check — they found other boarding businesses listed right alongside the Dogdayz rating.
+        Trust scored <strong>6 out of 22</strong> — just 27%.
+      </p>
+      <div class="problem-callout__fix">
+        Star rating placed above the headline — first thing on the page. Three real review cards with dog photos added before the pricing section.
+      </div>
+    </div>
+
+    <div class="problem-callout reveal">
+      <div class="problem-callout__num">Problem 03 · "Call for a personalised quote" — nobody calls</div>
+      <h3>When there's no price, most people move on to the next option</h3>
+      <p>
+        The FAQ said: "Pricing varies — call for a personalised quote." That's the line that sends someone to the next tab.
+        Pet owners want to self-check if you're in their budget before they invest the effort of calling.
+        No price visible on the homepage means fewer calls, not more. Pricing scored <strong>5 out of 16</strong> — just 31%.
+      </p>
+      <div class="problem-callout__fix">
+        Three real pricing cards added: daycare from $45/day, overnight from $65/night, extended stay from $350/week. "Most Popular" on the overnight option.
+      </div>
+    </div>
+
+    <div class="problem-callout reveal">
+      <div class="problem-callout__num">Problem 04 · Cage-free boarding — never mentioned</div>
+      <h3>Their biggest point of difference wasn't on the page at all</h3>
+      <p>
+        Dogdayz runs 100% cage-free farm stays. That's the thing every first-time boarding client is silently asking about before they commit.
+        "Will my dog be in a cage?" It's the #1 question — and the answer that would convert the most nervous first-timers.
+        The word "cage-free" appeared nowhere on the homepage. Emotional framing scored <strong>3 out of 16</strong> — just 19%.
+      </p>
+      <div class="problem-callout__fix">
+        "🏡 Cage-Free Always" added as the first trust chip in the hero — visible before the headline. Cage-free addressed again in the features section and the FAQ.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── FULL AUDIT BREAKDOWN ── -->
+<section>
+  <div class="container">
+    <div class="section-label">The full check</div>
+    <h2>Every area we looked at — and what we found</h2>
+    <p class="section-intro">We don't just look at how a website looks. We check 167 specific things across 9 areas — the stuff that actually determines whether someone calls or leaves. Here's how Dogdayz scored on each one, and what changed after the rebuild.</p>
+
+    <table class="audit-table reveal">
+      <thead>
+        <tr>
+          <th>Area we checked</th>
+          <th>Score before</th>
+          <th>Score after</th>
+          <th>What the problem was</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="area-name">The first thing people see</td>
+          <td><span class="score-before">9/28 · 32%</span></td>
+          <td><span class="score-after">24/28 · 86%</span></td>
+          <td class="area-note">Generic headline. No suburb, no service, no reason to stay. Rebuilt with a clear headline, suburb, cage-free chip, and Google rating above everything.</td>
+        </tr>
+        <tr>
+          <td class="area-name">Why someone should trust you</td>
+          <td><span class="score-before">6/22 · 27%</span></td>
+          <td><span class="score-after">16/22 · 73%</span></td>
+          <td class="area-note">300+ Google reviews — invisible. No reviews anywhere on the page. Added the star rating above the headline and three review cards before pricing.</td>
+        </tr>
+        <tr>
+          <td class="area-name">Prices and what you offer</td>
+          <td><span class="score-before">5/16 · 31%</span></td>
+          <td><span class="score-after">13/16 · 81%</span></td>
+          <td class="area-note">"Call for a quote." No prices on the homepage. Added three clear pricing cards so dog owners can self-qualify before picking up the phone.</td>
+        </tr>
+        <tr>
+          <td class="area-name">Answering their fears</td>
+          <td><span class="score-before">3/16 · 19%</span></td>
+          <td><span class="score-after">12/16 · 75%</span></td>
+          <td class="area-note">Cage-free: their biggest selling point, never mentioned. Put it in the hero, the features section, and the FAQ. The question every anxious first-timer has — now answered before they have to ask.</td>
+        </tr>
+        <tr>
+          <td class="area-name">How easy it is to get in touch</td>
+          <td><span class="score-before">8/14 · 57%</span></td>
+          <td><span class="score-after">11/14 · 79%</span></td>
+          <td class="area-note">Real phone numbers per location ✓ — but no sticky call button on scroll, no WhatsApp, no booking form above the fold. Fixed all three.</td>
+        </tr>
+        <tr>
+          <td class="area-name">Common questions dog owners ask</td>
+          <td><span class="score-before">7/15 · 47%</span></td>
+          <td><span class="score-after">13/15 · 87%</span></td>
+          <td class="area-note">There was a 17-question FAQ page — buried off-site. Not one question answered on the homepage. Added the 5 most important questions, starting with: "Do you use cages?"</td>
+        </tr>
+        <tr>
+          <td class="area-name">How it works on a phone</td>
+          <td><span class="score-before">8/20 · 40%</span></td>
+          <td><span class="score-after">16/20 · 80%</span></td>
+          <td class="area-note">Most local searches happen on a phone. No sticky CTA, pricing was buried, no WhatsApp button. Fixed: sticky header CTA, WhatsApp floating button, mobile-optimised layout.</td>
+        </tr>
+        <tr>
+          <td class="area-name">Whether Google can find you</td>
+          <td><span class="score-before">9/19 · 47%</span></td>
+          <td><span class="score-after">15/19 · 79%</span></td>
+          <td class="area-note">Title tag didn't mention suburb. No LocalBusiness structured data. Generic meta description. All updated: suburb in title, schema added, description rewritten with a clear call to action.</td>
+        </tr>
+        <tr>
+          <td class="area-name">Accessibility (can everyone use it?)</td>
+          <td><span class="score-before">6/19 · 32%</span></td>
+          <td><span class="score-after">10/19 · 53%</span></td>
+          <td class="area-note">Images missing descriptions, low contrast on some text, missing labels on interactive elements. Improved in the rebuild — and accessibility issues hurt Google rankings too.</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td><strong>Total</strong></td>
+          <td><span class="score-before">61 / 167 · 37%</span></td>
+          <td><span class="score-after">130 / 167 · 78%</span></td>
+          <td class="area-note" style="font-weight:600; color:var(--text);">Four high-priority problems. All fixed with copy and layout changes — no brand overhaul needed.</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</section>
+
+
+<!-- ── WHAT WE CHANGED ── -->
+<section>
+  <div class="container">
+    <div class="section-label">The rebuild</div>
+    <h2>Four things we changed that made the biggest difference</h2>
+    <p class="section-intro">Every change we made was directly tied to a problem we found in the audit. Nothing arbitrary — no aesthetic preferences. Each fix is traceable to a real reason why dog owners were leaving without booking.</p>
+
+    <div class="changes">
+      <div class="change-card reveal">
+        <div class="change-card__icon">⭐</div>
+        <h3>Google rating — first thing you see</h3>
+        <p>The 4.9★ rating with 300+ reviews now sits above the headline. Before a first-time visitor reads a single word about the business, they see that hundreds of other dog owners trusted it. Trust before everything.</p>
+      </div>
+      <div class="change-card reveal reveal--d1">
+        <div class="change-card__icon">🏡</div>
+        <h3>Cage-free — front and centre</h3>
+        <p>"Cage-free always" is in the hero as the first trust chip you see. Then in the features section. Then in the FAQ. Every anxious first-timer — the person most likely to pick someone else — now gets the answer before they have to ask.</p>
+      </div>
+      <div class="change-card reveal reveal--d2">
+        <div class="change-card__icon">💰</div>
+        <h3>Real prices — no more "call us"</h3>
+        <p>Three pricing cards with starting prices: daycare from $45/day, overnight from $65/night, extended stay from $350/week. Dog owners can now self-qualify in 10 seconds — and call ready to book instead of just enquiring.</p>
+      </div>
+      <div class="change-card reveal reveal--d3">
+        <div class="change-card__icon">📱</div>
+        <h3>Easy to contact on a phone</h3>
+        <p>Sticky call button that stays visible as you scroll. WhatsApp button floating in the corner. Online booking form above the fold. 88% of local pet searches happen on mobile — the rebuilt page meets them there.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── THE BUILD ── -->
+<section>
+  <div class="container">
+    <div class="section-label">What we built</div>
+    <h2>The rebuilt page — scored 78% on the same 167-point check</h2>
+    <p class="section-intro">After the audit we rebuilt the homepage from scratch, fixing every problem we found. Then we ran the same 167-point check again on the new page to verify it actually worked — not just that it looked better.</p>
+
+    <div class="result-strip reveal">
+      <div class="result-item">
+        <div class="result-item__num">78%</div>
+        <div class="result-item__label">New website score</div>
+      </div>
+      <div class="result-item">
+        <div class="result-item__num">+70</div>
+        <div class="result-item__label">Points gained</div>
+      </div>
+      <div class="result-item">
+        <div class="result-item__num">4 / 4</div>
+        <div class="result-item__label">Big problems fixed</div>
+      </div>
+    </div>
+
+    <div class="build-preview reveal">
+      <div class="build-preview__bar">
+        <span class="build-preview__bar-label">✓ The rebuilt Dogdayz page</span>
+        <a href="https://dogdayz.vercel.app" target="_blank" rel="noopener" class="build-preview__bar-link">View the live build ↗</a>
+      </div>
+      <img src="img/Dogdayz.png" alt="Full Dogdayz rebuilt page — star rating, cage-free, pricing, testimonials, FAQ" />
+    </div>
+  </div>
+</section>
+
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Your site might have the same problems</h2>
+    <p>Most pet business websites have 2–3 of these issues — and the owner has no idea, because visitors just quietly leave. A $100 check tells you exactly what's stopping people from calling, in plain English, in 24 hours.</p>
+    <div class="btn-row">
+      <a href="index.html#services" class="btn btn--primary">Check my website — $100 →</a>
+      <a href="index.html" class="btn btn--ghost">← See more work</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── FOOTER ── -->
+<footer class="page-footer">
+  <div class="container">
+    <div class="page-footer__inner">
+      <a href="index.html">🐾 Kindly Studio</a>
+      <span style="font-size:0.8125rem; color:rgba(255,255,255,0.3);">AU · NZ · SG</span>
+      <a href="index.html">← Back to all work</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

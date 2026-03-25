@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Grooming Angels — 8 Years of Credibility. None of It on the Homepage. · Kindly Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --green:        #2D6A4F;
+      --green-dark:   #1B4332;
+      --green-light:  #EEF7F2;
+      --green-mid:    #D1EAD9;
+      --white:        #FFFFFF;
+      --off-white:    #F8FAFB;
+      --text:         #111827;
+      --text-muted:   #6B7280;
+      --border:       #E5E7EB;
+      --red:          #B91C1C;
+      --red-light:    #FEF2F2;
+      --amber:        #92400E;
+      --amber-light:  #FEF3C7;
+      --radius:       10px;
+      --shadow-sm:    0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+      --shadow-md:    0 4px 16px rgba(0,0,0,0.08), 0 12px 32px rgba(0,0,0,0.06);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--off-white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { width: 100%; max-width: 860px; margin: 0 auto; padding: 0 24px; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; }
+    h2 { font-size: clamp(1.25rem, 3vw, 1.75rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; }
+    h3 { font-size: 1.0625rem; font-weight: 700; }
+    p  { color: var(--text-muted); line-height: 1.75; margin-bottom: 12px; }
+    p:last-child { margin-bottom: 0; }
+    p strong { color: var(--text); font-weight: 600; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(27, 67, 50, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 0 24px;
+    }
+    .nav__inner {
+      max-width: 860px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav__back {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.875rem; font-weight: 500; color: rgba(255,255,255,0.7);
+      transition: color 0.15s;
+    }
+    .nav__back:hover { color: #fff; }
+    .nav__tag {
+      font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.4);
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .nav__pill {
+      font-size: 0.6875rem; font-weight: 700;
+      padding: 4px 12px; border-radius: 100px;
+      background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.7);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--green-dark);
+      background-image:
+        radial-gradient(ellipse 60% 70% at 90% 20%, rgba(45,106,79,0.3) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 50% at 5% 80%, rgba(45,106,79,0.15) 0%, transparent 60%);
+      padding: 72px 0 60px;
+      color: #fff;
+    }
+    .hero__eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(255,255,255,0.45);
+      margin-bottom: 20px;
+    }
+    .hero__eyebrow::before {
+      content: ''; display: inline-block;
+      width: 20px; height: 2px;
+      background: #52C281; border-radius: 2px;
+    }
+    .hero h1 { color: #fff; margin-bottom: 20px; }
+    .hero h1 em { font-style: normal; color: #52C281; }
+    .hero__sub {
+      font-size: 1rem; color: rgba(255,255,255,0.65);
+      max-width: 600px; margin-bottom: 0; line-height: 1.7;
+    }
+
+    /* Stat strip */
+    .stat-strip {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius); overflow: hidden;
+      margin-top: 36px; background: rgba(255,255,255,0.04);
+    }
+    .stat-strip__item {
+      padding: 20px 16px; text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    .stat-strip__item:last-child { border-right: none; }
+    .stat-strip__num {
+      font-size: 1.75rem; font-weight: 900; line-height: 1; color: #fff;
+      letter-spacing: -0.03em;
+    }
+    .stat-strip__num--red    { color: #FCA5A5; }
+    .stat-strip__num--green  { color: #52C281; }
+    .stat-strip__num--amber  { color: #FCD34D; }
+    .stat-strip__label {
+      font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.4);
+      margin-top: 5px;
+    }
+
+    /* Before/after screens */
+    .screens {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      margin-top: 36px;
+    }
+    .screen {
+      border-radius: var(--radius); overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .screen__tag {
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 9px 14px;
+    }
+    .screen__tag--before { background: rgba(239,68,68,0.25); color: #FCA5A5; }
+    .screen__tag--after  { background: rgba(82,194,129,0.25); color: #52C281; }
+    .screen__img { aspect-ratio: 16/10; overflow: hidden; background: #111; }
+    .screen__img img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.4s; }
+    .screen:hover .screen__img img { transform: scale(1.03); }
+    .screen__caption {
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.06);
+      font-size: 0.8125rem; color: rgba(255,255,255,0.55); line-height: 1.5;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 72px 0; }
+    section:nth-child(even):not(.hero):not(.cta-section) { background: var(--white); }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--green);
+      margin-bottom: 12px;
+    }
+    .section-label::before {
+      content: ''; display: inline-block;
+      width: 16px; height: 2px;
+      background: var(--green); border-radius: 2px;
+    }
+    .section-intro { max-width: 600px; margin-bottom: 36px; }
+
+    /* Problem callout */
+    .problem-callout {
+      background: var(--red-light); border: 1px solid #FECACA;
+      border-radius: var(--radius); padding: 24px 28px; margin-bottom: 16px;
+    }
+    .problem-callout__num {
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 8px;
+    }
+    .problem-callout h3 { color: var(--text); margin-bottom: 8px; }
+    .problem-callout p { font-size: 0.9rem; }
+    .problem-callout__fix {
+      margin-top: 14px; padding-top: 14px;
+      border-top: 1px solid #FECACA;
+      font-size: 0.875rem; font-weight: 600; color: var(--green);
+      display: flex; gap: 8px;
+    }
+    .problem-callout__fix::before { content: '→'; flex-shrink: 0; }
+
+    /* Build sections table */
+    .build-table { width: 100%; border-collapse: collapse; margin-top: 28px; font-size: 0.875rem; }
+    .build-table thead th {
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-muted);
+      text-align: left; padding: 10px 14px;
+      background: var(--green-light); border-bottom: 2px solid var(--green-mid);
+    }
+    .build-table tbody td {
+      padding: 13px 14px; border-bottom: 1px solid var(--border);
+      vertical-align: top; line-height: 1.6;
+    }
+    .build-table tbody tr:last-child td { border-bottom: none; }
+    .build-table tbody tr:hover td { background: var(--green-light); }
+    .section-name { font-weight: 600; color: var(--text); white-space: nowrap; }
+    .section-detail { color: var(--text-muted); font-size: 0.8125rem; }
+    .badge-built {
+      display: inline-flex; align-items: center;
+      font-size: 0.625rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 2px 7px; border-radius: 100px;
+      background: #DCFCE7; color: #15803D; margin-right: 5px; white-space: nowrap;
+    }
+
+    /* Changes grid */
+    .changes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+    .change-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .change-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .change-card__icon { font-size: 1.625rem; margin-bottom: 12px; }
+    .change-card h3 { font-size: 0.9375rem; margin-bottom: 8px; }
+    .change-card p { font-size: 0.875rem; }
+
+    /* Result strip */
+    .result-strip {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      background: var(--border); border-radius: var(--radius);
+      overflow: hidden; margin-top: 36px; margin-bottom: 32px;
+    }
+    .result-item {
+      background: var(--white); padding: 28px 20px; text-align: center;
+    }
+    .result-item__num {
+      font-size: 2.25rem; font-weight: 900; color: var(--green);
+      letter-spacing: -0.03em; line-height: 1;
+    }
+    .result-item__label {
+      font-size: 0.75rem; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.08em; margin-top: 6px;
+    }
+
+    /* Build preview */
+    .build-preview {
+      border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; box-shadow: var(--shadow-md);
+    }
+    .build-preview__bar {
+      background: var(--green); padding: 12px 18px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .build-preview__bar-label {
+      font-size: 0.75rem; font-weight: 700; color: rgba(255,255,255,0.9);
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    .build-preview__bar-link {
+      font-size: 0.8125rem; font-weight: 600; color: rgba(255,255,255,0.85);
+      transition: color 0.15s;
+    }
+    .build-preview__bar-link:hover { color: #fff; }
+    .build-preview img { width: 100%; display: block; }
+
+    /* CTA footer */
+    .cta-section {
+      background: var(--green-dark);
+      padding: 72px 0;
+      text-align: center;
+    }
+    .cta-section h2 { color: #fff; margin-bottom: 16px; }
+    .cta-section p  { color: rgba(255,255,255,0.65); max-width: 520px; margin: 0 auto 32px; }
+    .cta-section .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.9375rem; font-weight: 700; padding: 14px 28px;
+      border-radius: var(--radius); text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn--primary { background: #52C281; color: #fff; }
+    .btn--primary:hover { background: #3dab6a; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(82,194,129,0.35); }
+    .btn--ghost { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.2); }
+    .btn--ghost:hover { background: rgba(255,255,255,0.18); transform: translateY(-1px); }
+    .cta-section .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    /* Page footer */
+    .page-footer {
+      background: var(--green-dark); border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 24px 0;
+    }
+    .page-footer__inner {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .page-footer a {
+      font-size: 0.8125rem; color: rgba(255,255,255,0.45);
+      transition: color 0.15s;
+    }
+    .page-footer a:hover { color: rgba(255,255,255,0.85); }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 360ms ease-out, transform 360ms ease-out; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal--d1 { transition-delay: 80ms; }
+    .reveal--d2 { transition-delay: 160ms; }
+    .reveal--d3 { transition-delay: 240ms; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+    @media (max-width: 700px) {
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-strip__item:nth-child(2) { border-right: none; }
+      .stat-strip__item:nth-child(1),
+      .stat-strip__item:nth-child(2) { border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .screens { grid-template-columns: 1fr; }
+      .changes { grid-template-columns: 1fr; }
+      .result-strip { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav__inner">
+    <a href="index.html" class="nav__back">← Kindly Studio</a>
+    <span class="nav__tag">Case Study</span>
+    <span class="nav__pill">The Grooming Angels · Grooming · SG</span>
+  </div>
+</nav>
+
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero__eyebrow">The Grooming Angels · Pet Grooming · Singapore</div>
+    <h1>Tatler Asia award. 4.8 stars. 15 certified groomers. <em>The homepage showed none of it.</em></h1>
+    <p class="hero__sub">
+      The Grooming Angels had earned every trust signal a Singapore pet owner looks for —
+      a Tatler Asia feature, SKC certification, 114 Google reviews, and 15 named groomers.
+      Their website had none of it above the fold. We ran a full build: every credential surfaced,
+      every booking path unblocked, every Singapore-specific objection answered.
+    </p>
+
+    <div class="stat-strip reveal">
+      <div class="stat-strip__item">
+        <div class="stat-strip__num stat-strip__num--amber">4.8★</div>
+        <div class="stat-strip__label">Google rating</div>
+      </div>
+      <div class="stat-strip__item">
+        <div class="stat-strip__num stat-strip__num--red">114+</div>
+        <div class="stat-strip__label">Reviews — hidden</div>
+      </div>
+      <div class="stat-strip__item">
+        <div class="stat-strip__num stat-strip__num--red">15</div>
+        <div class="stat-strip__label">Groomers — unnamed</div>
+      </div>
+      <div class="stat-strip__item">
+        <div class="stat-strip__num stat-strip__num--green">10</div>
+        <div class="stat-strip__label">Sections built</div>
+      </div>
+    </div>
+
+    <div class="screens">
+      <div class="screen reveal reveal--d1">
+        <div class="screen__tag screen__tag--before">Before — their live website</div>
+        <div class="screen__img">
+          <img src="../job-portfolio/img/grooming-angels-live.png" alt="The Grooming Angels live Shopify site — no credentials above fold" />
+        </div>
+        <div class="screen__caption">
+          Their Shopify site. The Tatler Asia feature, the 4.8★ rating, and all 15 named groomers — buried or absent from the homepage entirely.
+        </div>
+      </div>
+      <div class="screen reveal reveal--d2">
+        <div class="screen__tag screen__tag--after">After — the full build</div>
+        <div class="screen__img">
+          <img src="../job-portfolio/img/grooming-angels.png" alt="The Grooming Angels rebuilt — Tatler badge, 4.8★ above fold, team section, dual booking paths" />
+        </div>
+        <div class="screen__caption">
+          4.8★ above the headline. Tatler Asia badge in the first screen. 15 named groomers. Separate salon and housecall booking paths.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── THE PROBLEM ── -->
+<section>
+  <div class="container">
+    <div class="section-label">What was going wrong</div>
+    <h2>Eight years of credentials — invisible to every visitor</h2>
+    <p class="section-intro">The Grooming Angels had built real credibility over 8 years: a Tatler Asia feature, SKC-certified groomers, 114 Google reviews, and a housecall service covering the whole island. None of it appeared where pet owners actually look before they book. Four problems were costing the most enquiries.</p>
+
+    <div class="problem-callout reveal">
+      <div class="problem-callout__num">Problem 01 · Award + rating — both invisible</div>
+      <h3>Tatler Asia "Best Pet Groomers Singapore" + 4.8★ — not above the fold</h3>
+      <p>
+        A Tatler Asia feature is the single highest trust signal a Singapore grooming business can earn.
+        Combined with a 4.8★ rating across 114 Google reviews, it would have answered the
+        booking question for many first-time visitors before they even read a line of copy.
+        Neither appeared on the homepage hero. Every visitor arrived not knowing they were
+        looking at one of Singapore's most recognised grooming businesses.
+      </p>
+      <div class="problem-callout__fix">
+        4.8★ rating pill placed above the H1 — first element every visitor sees. Tatler Asia badge visible in the first screenful, before any copy is read.
+      </div>
+    </div>
+
+    <div class="problem-callout reveal">
+      <div class="problem-callout__num">Problem 02 · 15 certified groomers — not one named</div>
+      <h3>The #1 question every pet owner has before a first booking — unanswered</h3>
+      <p>
+        "Who is going to touch my animal?" is the first thing an anxious pet owner wants to know.
+        The Grooming Angels had 15 SKC-certified groomers — including Dona (ex-Mandai Wildlife Reserve)
+        and Joycelin (certified with distinction). Not one was named on the homepage.
+        The page could have belonged to any grooming business in Singapore.
+        Specificity builds trust that "experienced team" copy never can.
+      </p>
+      <div class="problem-callout__fix">
+        Full team section built: all 15 groomers named with credentials. Visitors now know exactly who will be handling their pet before they book.
+      </div>
+    </div>
+
+    <div class="problem-callout reveal">
+      <div class="problem-callout__num">Problem 03 · Housecall and salon — one undifferentiated path</div>
+      <h3>Two separate services. Two phone lines. Zero separate booking flows.</h3>
+      <p>
+        The Grooming Angels runs two distinct services — salon grooming and island-wide housecall —
+        with separate phone lines for each. A pet owner booking a housecall needs different
+        information, different pricing, and different FAQ answers than someone visiting the salon.
+        The live site treated both as one flow with no differentiation.
+        Housecall-specific pricing, HDB/condo access questions, and a dedicated booking path
+        were all missing.
+      </p>
+      <div class="problem-callout__fix">
+        Separate pricing card for housecall (+SGD$30 add-on). Pre-filled WhatsApp buttons for salon and housecall separately. FAQ section addressing HDB/condo logistics specifically.
+      </div>
+    </div>
+
+    <div class="problem-callout reveal">
+      <div class="problem-callout__num">Problem 04 · No FAQ — every Singapore-specific fear unanswered</div>
+      <h3>SG pet owners ask specific questions before a first booking. None were answered.</h3>
+      <p>
+        Singapore pet owners have specific concerns before booking: "Can you groom in an HDB flat?"
+        "Do you handle anxious cats?" "What's the deposit?" "Do you groom rabbits?"
+        None of these were answered anywhere on the live site.
+        Every unanswered question is a reason to send a WhatsApp to a competitor instead.
+      </p>
+      <div class="problem-callout__fix">
+        8-question FAQ built specifically for SG anxieties: anxious pets, housecall logistics, HDB/condo access, all pet types (dogs, cats, rabbits, guinea pigs), deposit, cancellation, multi-pet households.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── WHAT WE BUILT ── -->
+<section>
+  <div class="container">
+    <div class="section-label">The build</div>
+    <h2>10 sections — everything a Singapore pet owner needs to book</h2>
+    <p class="section-intro">This wasn't an audit-then-rebuild. The full pipeline ran: scrape, photo intelligence, copy strategy, wireframe, and build. Every trust signal the business had earned was inventoried and placed in the order that matches how a Singapore pet owner actually makes a booking decision.</p>
+
+    <table class="build-table reveal">
+      <thead>
+        <tr>
+          <th>Section</th>
+          <th>What we built</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="section-name">Hero</td>
+          <td class="section-detail"><span class="badge-built">Built</span> 4.8★ above H1 · Tatler Asia badge in first screenful · full team photo · dual CTAs (salon + housecall) · SKC + Low Stress Handling trust chips</td>
+        </tr>
+        <tr>
+          <td class="section-name">Why Choose Us</td>
+          <td class="section-detail"><span class="badge-built">Built</span> 6 feature cards: certifications, island-wide housecall, all pets (dogs/cats/rabbits/guinea pigs), 15 groomers, Tatler Asia recognition, transparent pricing</td>
+        </tr>
+        <tr>
+          <td class="section-name">Testimonials</td>
+          <td class="section-detail"><span class="badge-built">Built</span> 3 real Google reviews with pet photos · 4.8★ badge linking to full 114-review profile</td>
+        </tr>
+        <tr>
+          <td class="section-name">How It Works</td>
+          <td class="section-detail">3-step booking flow: book via WhatsApp → groomer visits your home / visit Katong salon → happy pet + photo update sent</td>
+        </tr>
+        <tr>
+          <td class="section-name">Pricing</td>
+          <td class="section-detail"><span class="badge-built">Built</span> SGD pricing · 3 cards: Bath &amp; Fluff · Full Groom (Most Popular) · Housecall add-on (+SGD$30) · pricing for dogs, cats, rabbits, guinea pigs</td>
+        </tr>
+        <tr>
+          <td class="section-name">Gallery</td>
+          <td class="section-detail">6-photo grid: full team in uniforms · neon salon sign · spa tubs · housecall session · post-groom pet photos</td>
+        </tr>
+        <tr>
+          <td class="section-name">Team</td>
+          <td class="section-detail"><span class="badge-built">Built</span> All 15 groomers named with credentials — including Dona (ex-Mandai Wildlife Reserve) and Joycelin (certified with distinction)</td>
+        </tr>
+        <tr>
+          <td class="section-name">FAQ</td>
+          <td class="section-detail"><span class="badge-built">Built</span> 8 questions: anxious pets, housecall process, all pet types, HDB/condo access, deposit, cancellation, multi-pet households</td>
+        </tr>
+        <tr>
+          <td class="section-name">Final CTA</td>
+          <td class="section-detail"><span class="badge-built">Built</span> Dual booking path: salon + housecall · pre-filled WhatsApp for both · sticky WhatsApp button on all scroll positions</td>
+        </tr>
+        <tr>
+          <td class="section-name">SEO / Schema</td>
+          <td class="section-detail"><span class="badge-built">Built</span> LocalBusiness + AggregateRating JSON-LD · OpenGraph tags · Katong-specific meta description · semantic HTML throughout</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<!-- ── WHAT WE CHANGED ── -->
+<section>
+  <div class="container">
+    <div class="section-label">The four changes that made the biggest difference</div>
+    <h2>Every decision tied to a specific reason visitors were leaving</h2>
+    <p class="section-intro">Nothing in this build was added for aesthetics. Each element addresses a reason a Singapore pet owner might hesitate — or message a competitor instead.</p>
+
+    <div class="changes">
+      <div class="change-card reveal">
+        <div class="change-card__icon">🏆</div>
+        <h3>Tatler Asia + 4.8★ — first things you see</h3>
+        <p>The Tatler Asia badge and star rating now appear before the headline. Before a visitor reads a single word about the business, they see it's been recognised by Singapore's most trusted lifestyle magazine and rated 4.8 stars by 114 Google reviewers.</p>
+      </div>
+      <div class="change-card reveal reveal--d1">
+        <div class="change-card__icon">👥</div>
+        <h3>15 named groomers with credentials</h3>
+        <p>"Who is going to touch my pet?" is the first question every nervous first-timer has. Now the answer is right there: 15 named, certified groomers — with backgrounds, qualifications, and specialisations. Not "our experienced team." Actual people.</p>
+      </div>
+      <div class="change-card reveal reveal--d2">
+        <div class="change-card__icon">📱</div>
+        <h3>WhatsApp as the primary booking path</h3>
+        <p>In Singapore, WhatsApp is how pet owners book services — not web forms. The sticky WhatsApp button is visible at all times. Pre-filled messages for salon and housecall mean booking is a single tap, not a conversation to start from scratch.</p>
+      </div>
+      <div class="change-card reveal reveal--d3">
+        <div class="change-card__icon">🏠</div>
+        <h3>Housecall treated as a full service</h3>
+        <p>Salon and housecall now have separate pricing, separate booking paths, and a FAQ dedicated to housecall logistics — HDB/condo access, what to expect, how the deposit works. Two different customers, two different pages of information, on the same page.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── THE BUILD ── -->
+<section>
+  <div class="container">
+    <div class="section-label">What we delivered</div>
+    <h2>A page that earns trust before a visitor has to ask a single question</h2>
+    <p class="section-intro">The Grooming Angels didn't need new credentials. They needed a page that showed the ones they already had, in the right order, to the right visitor. Every trust signal they'd earned in 8 years — finally visible.</p>
+
+    <div class="result-strip reveal">
+      <div class="result-item">
+        <div class="result-item__num">10</div>
+        <div class="result-item__label">Sections built</div>
+      </div>
+      <div class="result-item">
+        <div class="result-item__num">15</div>
+        <div class="result-item__label">Groomers named</div>
+      </div>
+      <div class="result-item">
+        <div class="result-item__num">4 / 4</div>
+        <div class="result-item__label">Big problems fixed</div>
+      </div>
+    </div>
+
+    <div class="build-preview reveal">
+      <div class="build-preview__bar">
+        <span class="build-preview__bar-label">✓ The Grooming Angels — full build</span>
+        <a href="https://grooming-angels.vercel.app" target="_blank" rel="noopener" class="build-preview__bar-link">View the live build ↗</a>
+      </div>
+      <img src="img/GroomingAngel.png" alt="The Grooming Angels full build — Tatler badge, 4.8★, team section, housecall and salon booking paths" />
+    </div>
+  </div>
+</section>
+
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Your site might have the same problems</h2>
+    <p>Most pet business websites are hiding the exact things that would make someone book — reviews, credentials, pricing, the answers to the questions they're silently asking. A $100 check tells you what's missing, in plain English, in 24 hours.</p>
+    <div class="btn-row">
+      <a href="index.html#services" class="btn btn--primary">Check my website — $100 →</a>
+      <a href="index.html" class="btn btn--ghost">← See more work</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── FOOTER ── -->
+<footer class="page-footer">
+  <div class="container">
+    <div class="page-footer__inner">
+      <a href="index.html">🐾 Kindly Studio</a>
+      <span style="font-size:0.8125rem; color:rgba(255,255,255,0.3);">AU · NZ · SG</span>
+      <a href="index.html">← Back to all work</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
