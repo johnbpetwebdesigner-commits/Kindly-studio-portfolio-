@@ -1141,7 +1141,7 @@
           <li><a href="#work">Work</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#services" class="nav-cta">Get my $100 check</a></li>
+          <li><a href="#" class="nav-cta open-paid-audit-modal">Get my $100 check</a></li>
         </ul>
       </div>
     </div>
@@ -1160,7 +1160,7 @@
           <h1>Conversion Web Designer for Pet Groomers, Boarders, and Daycare Owners Ready to Fill Their Calendar</h1>
           <p>Backed by 10 years of conversion experience — for groomers, boarders, daycare, sitters, and every pet business whose reputation deserves more bookings. Serving AU, NZ, and SG.</p>
           <div class="btn-group">
-            <a href="#services" class="btn btn--primary">Get my $100 check →</a>
+            <a href="#" class="btn btn--primary open-paid-audit-modal">Get my $100 check →</a>
             <a href="#work" class="btn btn--ghost">See the work ↓</a>
           </div>
           <div class="trust-chips">
@@ -1427,7 +1427,7 @@
           </ul>
           <p class="upgrade-note">The $100 comes off the price of a new website if you decide to go ahead.</p>
           <p class="value-note">Most agencies charge $500–$1,000 for a website audit and take 2–4 weeks. This is $100, done in 24 hours, written so you know exactly what to fix to get more bookings.</p>
-          <a href="#" class="btn btn--primary">Check my website →</a>
+          <a href="#" class="btn btn--primary open-paid-audit-modal">Check my website →</a>
         </div>
 
         <!-- Card 3: WhatsApp (coming soon) -->
@@ -1582,7 +1582,7 @@
           <div class="cta-track">
             <h4>Website Check — $100</h4>
             <p>I'll go through your site and tell you exactly what to fix. Plain English. Done in 24 hours.</p>
-            <a href="#" class="btn btn--white">Check my website →</a>
+            <a href="#" class="btn btn--white open-paid-audit-modal">Check my website →</a>
           </div>
           <div class="cta-track">
             <h4>Full Website Build</h4>
@@ -1809,6 +1809,100 @@
         // Fallback: redirect to Calendly directly if API fails
         window.location.href = 'https://calendly.com/johnb-petwebdesigner/pet-business-website-strategy-call?name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email);
       }
+    });
+  </script>
+
+
+  <!-- ── PAID AUDIT MODAL ── -->
+  <div id="paid-audit-modal" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:24px;">
+    <div style="background:#fff;border-radius:14px;padding:36px 32px;max-width:440px;width:100%;position:relative;box-shadow:0 24px 64px rgba(0,0,0,0.2);">
+      <button id="close-paid-audit-modal" style="position:absolute;top:16px;right:18px;background:none;border:none;font-size:1.375rem;cursor:pointer;color:#9ca3af;line-height:1;">×</button>
+      <p style="font-size:0.6875rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#2D6A4F;margin:0 0 8px;">$100 · Delivered in 24 hours</p>
+      <h3 style="font-size:1.25rem;font-weight:800;color:#111827;margin:0 0 10px;line-height:1.2;">Get your Website Check</h3>
+      <p style="font-size:0.9rem;color:#6b7280;margin:0 0 24px;line-height:1.65;">I'll check 167 things on your site and tell you exactly what's stopping people from calling. Plain English. In your inbox within 24 hours.</p>
+
+      <form id="paid-audit-form">
+        <div style="margin-bottom:14px;">
+          <label style="display:block;font-size:0.8125rem;font-weight:600;color:#374151;margin-bottom:6px;">Your full name</label>
+          <input type="text" id="paid-name" placeholder="Jane Smith" required
+            style="width:100%;padding:10px 14px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:0.9375rem;outline:none;box-sizing:border-box;transition:border-color 0.15s;"
+            onfocus="this.style.borderColor='#2D6A4F'" onblur="this.style.borderColor='#e5e7eb'">
+        </div>
+        <div style="margin-bottom:14px;">
+          <label style="display:block;font-size:0.8125rem;font-weight:600;color:#374151;margin-bottom:6px;">Your email</label>
+          <input type="email" id="paid-email" placeholder="you@example.com" required
+            style="width:100%;padding:10px 14px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:0.9375rem;outline:none;box-sizing:border-box;transition:border-color 0.15s;"
+            onfocus="this.style.borderColor='#2D6A4F'" onblur="this.style.borderColor='#e5e7eb'">
+        </div>
+        <div style="margin-bottom:20px;">
+          <label style="display:block;font-size:0.8125rem;font-weight:600;color:#374151;margin-bottom:6px;">Your website URL</label>
+          <input type="url" id="paid-url" placeholder="https://yourpetbusiness.com.au" required
+            style="width:100%;padding:10px 14px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:0.9375rem;outline:none;box-sizing:border-box;transition:border-color 0.15s;"
+            onfocus="this.style.borderColor='#2D6A4F'" onblur="this.style.borderColor='#e5e7eb'">
+        </div>
+        <button type="submit" id="paid-submit"
+          style="width:100%;background:#E8834A;color:#fff;border:none;padding:13px 20px;border-radius:8px;font-size:0.9375rem;font-weight:700;cursor:pointer;transition:background 0.15s;">
+          Pay $100 and get started →
+        </button>
+      </form>
+
+      <div id="paid-loading" style="display:none;text-align:center;padding:24px 0 8px;">
+        <div style="font-size:1.5rem;margin-bottom:10px;">⏳</div>
+        <p style="font-size:0.9375rem;font-weight:600;color:#111827;margin:0;">Redirecting to payment…</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const WISE_PAYMENT_URL = 'https://wise.com/pay/me/PLACEHOLDER';
+
+    const paidModal = document.getElementById('paid-audit-modal');
+    const paidForm = document.getElementById('paid-audit-form');
+    const paidLoading = document.getElementById('paid-loading');
+    const paidSubmitBtn = document.getElementById('paid-submit');
+
+    document.querySelectorAll('.open-paid-audit-modal').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        paidModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    document.getElementById('close-paid-audit-modal').addEventListener('click', () => {
+      paidModal.style.display = 'none';
+      document.body.style.overflow = '';
+    });
+
+    paidModal.addEventListener('click', (e) => {
+      if (e.target === paidModal) {
+        paidModal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    });
+
+    paidForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      paidSubmitBtn.textContent = 'Setting up…';
+      paidSubmitBtn.disabled = true;
+
+      const name = document.getElementById('paid-name').value.trim();
+      const email = document.getElementById('paid-email').value.trim();
+      const websiteUrl = document.getElementById('paid-url').value.trim();
+
+      // Save lead + notify John — fire and forget
+      fetch('https://pet-landing-pipeline.vercel.app/api/paid-audit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, websiteUrl }),
+      }).catch(() => {});
+
+      paidForm.style.display = 'none';
+      paidLoading.style.display = 'block';
+
+      setTimeout(() => {
+        window.location.href = WISE_PAYMENT_URL;
+      }, 800);
     });
   </script>
 
