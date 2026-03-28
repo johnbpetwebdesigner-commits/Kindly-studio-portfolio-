@@ -257,8 +257,13 @@
 
     /* Build preview */
     .build-preview {
-      border: 1px solid var(--border); border-radius: var(--radius);
-      overflow: hidden; box-shadow: var(--shadow-md);
+      overflow: hidden;
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      margin-left: -50vw;
+      border-radius: 0;
+      border-top: 1px solid var(--border);
     }
     .build-preview__bar {
       background: var(--green); padding: 12px 18px;
@@ -602,7 +607,7 @@
         <span class="build-preview__bar-label">✓ The rebuilt Dogdayz page</span>
         <a href="https://dogdayz.vercel.app" target="_blank" rel="noopener" class="build-preview__bar-link">View the live build ↗</a>
       </div>
-      <img src="img/dogdayz.png" alt="Full Dogdayz rebuilt page — star rating, cage-free, pricing, testimonials, FAQ" />
+      <img src="img/dogdayz-full.png" alt="Full Dogdayz rebuilt page — star rating, cage-free, pricing, testimonials, FAQ" />
     </div>
   </div>
 </section>
